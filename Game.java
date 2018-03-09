@@ -46,13 +46,13 @@ public class Game
         jardin = new Room("en el jardin");
         
         // initialise room exits
-        entrada.setExits(salon, null, null, null);
-        salon.setExits(null, dormitorio, entrada, cocina);
-        dormitorio.setExits(null, null, null, salon);
-        cocina.setExits(bodega, salon, null, null);
-        bodega.setExits(despacho, null, cocina, null);
-        despacho.setExits(null, null, bodega, jardin);
-        jardin.setExits(null, despacho, null, null);
+        entrada.setExits(salon, null, null, null, null);
+        salon.setExits(null, dormitorio, entrada, cocina, null);
+        dormitorio.setExits(null, null, null, salon, null);
+        cocina.setExits(bodega, salon, null, null, null);
+        bodega.setExits(despacho, null, cocina, null, salon);
+        despacho.setExits(null, null, bodega, jardin, null);
+        jardin.setExits(null, despacho, null, null, bodega);
 
         currentRoom = entrada;  // start game outside
     }
@@ -160,6 +160,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("southEast")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -203,6 +206,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("southEast ");
         }
         System.out.println();
         
