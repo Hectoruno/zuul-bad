@@ -46,14 +46,30 @@ public class Game
         jardin = new Room("en el jardin");
         
         // initialise room exits
-        entrada.setExits(salon, null, null, null, null,cocina);
-        salon.setExits(null, dormitorio, entrada, cocina, null,bodega);
-        dormitorio.setExits(null, null, null, salon, null,null);
-        cocina.setExits(bodega, salon, null, null, null,null);
-        bodega.setExits(despacho, null, cocina, null, salon,jardin);
-        despacho.setExits(null, null, bodega, jardin, null,null);
-        jardin.setExits(null, despacho, null, null, bodega,null);
-
+        entrada.setExit("north", salon);
+        entrada.setExit("northWest", cocina);
+        
+        salon.setExit("east", dormitorio);
+        salon.setExit("south", entrada);
+        salon.setExit("west", cocina);
+        salon.setExit("northWest", bodega);
+        
+        dormitorio.setExit("west", salon);
+        
+        cocina.setExit("north", bodega);
+        cocina.setExit("east", salon);
+        
+        bodega.setExit("north", despacho);
+        bodega.setExit("south", cocina);
+        bodega.setExit("southEast", salon);
+        bodega.setExit("northWest", jardin);
+        
+        despacho.setExit("south", bodega);
+        despacho.setExit("west", jardin);
+        
+        jardin.setExit("east", despacho);
+        jardin.setExit("southEast", bodega);
+        
         currentRoom = entrada;  // start game outside
     }
 
