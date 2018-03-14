@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -35,7 +35,7 @@ public class Game
     private void createRooms()
     {
         Room entrada, salon, dormitorio, cocina, bodega, despacho, jardin;
-      
+
         // create the rooms
         entrada = new Room("en la entrada del palacio");
         salon = new Room("en el salon");
@@ -44,32 +44,32 @@ public class Game
         bodega = new Room("en la bodega");
         despacho = new Room("en el despacho");
         jardin = new Room("en el jardin");
-        
+
         // initialise room exits
         entrada.setExit("north", salon);
         entrada.setExit("northWest", cocina);
-        
+
         salon.setExit("east", dormitorio);
         salon.setExit("south", entrada);
         salon.setExit("west", cocina);
         salon.setExit("northWest", bodega);
-        
+
         dormitorio.setExit("west", salon);
-        
+
         cocina.setExit("north", bodega);
         cocina.setExit("east", salon);
-        
+
         bodega.setExit("north", despacho);
         bodega.setExit("south", cocina);
         bodega.setExit("southEast", salon);
         bodega.setExit("northWest", jardin);
-        
+
         despacho.setExit("south", bodega);
         despacho.setExit("west", jardin);
-        
+
         jardin.setExit("east", despacho);
         jardin.setExit("southEast", bodega);
-        
+
         currentRoom = entrada;  // start game outside
     }
 
@@ -82,7 +82,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -125,6 +125,9 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("look")) {
+            look();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -164,7 +167,7 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-        
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -189,7 +192,7 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
+
     /**
      * 
      */
@@ -197,6 +200,11 @@ public class Game
         System.out.print(currentRoom.getLongDescription());
 
         System.out.println();
-        
+
+    }
+
+    private void look() 
+    {
+        System.out.println(currentRoom.getLongDescription());
     }
 }
