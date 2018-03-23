@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -19,6 +20,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
     private Item item;
+    private ArrayList <Item> itemList;
 
     /**
      * Create a room described "description". Initially, it has
@@ -26,11 +28,11 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, Item item) 
+    public Room(String description) 
     {
         this.description = description;
         exits = new HashMap<>();
-        this.item = item;
+        itemList = new ArrayList<>();
     }
 
     /**
@@ -60,7 +62,7 @@ public class Room
     public String getExitString()
     {
         Set <String> namesOfDirection = exits.keySet();
-        String exitsDescription = "Exit ";
+        String exitsDescription = "";
 
         for(String direction : namesOfDirection) {
             exitsDescription += direction + " ";
@@ -77,7 +79,33 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString() + item.getInfo();
-        
+        return "You are " + description + ".\n" + "objetos: " + infoObjHabitacion()+ ".\n" + "Tienes estas posibilidades " + getExitString();
+
     }
-}
+    
+    /**
+     * Añade más de un objeto
+     */
+
+    public void addItem(String itemDescription, int itemWeigh)
+    {
+        Item it= new Item (itemDescription, itemWeigh);
+        itemList.add(it);        
+    }
+
+    /**
+     * Muestra la informacion de los obejtos de cada habitacion
+     */
+    public String infoObjHabitacion(){
+        String infoObjHabitacion="";
+        if(itemList.size() <= 0){
+            infoObjHabitacion="No hay objetos en esta ubicacion";
+        } else {
+            for(Item objetoDeLaLista : itemList)
+            {
+                infoObjHabitacion += objetoDeLaLista.getNombre();
+            }
+        }
+        return infoObjHabitacion;
+    }
+} 

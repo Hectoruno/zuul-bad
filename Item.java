@@ -31,18 +31,26 @@ public class Item {
     }
 
     /**
-     * Devuelve el peso del item.
+     * Devuelve el nombre del item.
+     * @return Devuelve el nombre del item.
+     */
+    public void setNombre(String nuevoNombre) {
+        name = nuevoNombre;
+    }
+
+    /**  Peso del item.
      * @return Devuelve el peso del item.
      */
-    public int getItem() {
-        return weigh;
+    public void setWeigh(int nuevoWeigh) {
+        weigh = nuevoWeigh;
     }
 
     /**
-     * Devuelve una cadena con toda la informacion del item.
-     * @return Devuelve una cadena con toda la informacion del item.
+     * Devuelve el peso del item.
+     * @return Devuelve el peso del item.
      */
-    public String getInfo() {
-        return name + " " + weigh;
+
+    public int getItem() {
+        return weigh;
     }
-} 
+}
