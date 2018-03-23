@@ -37,13 +37,13 @@ public class Game
         Room entrada, salon, dormitorio, cocina, bodega, despacho, jardin;
 
         // create the rooms
-        entrada = new Room("en la entrada del palacio");
-        salon = new Room("en el salon");
-        dormitorio = new Room("en el dormitorio");
-        cocina = new Room("en la cocina");
-        bodega = new Room("en la bodega");
-        despacho = new Room("en el despacho");
-        jardin = new Room("en el jardin");
+        entrada = new Room("en la entrada del palacio",new Item ("linterna", 1));
+        salon = new Room("en el salon",new Item ("null", 0));
+        dormitorio = new Room("en el dormitorio",new Item ("null", 0));
+        cocina = new Room("en la cocina",new Item ("null", 0));
+        bodega = new Room("en la bodega",new Item ("null", 0));
+        despacho = new Room("en el despacho",new Item ("null", 0));
+        jardin = new Room("en el jardin",new Item ("null", 0));
 
         // initialise room exits
         entrada.setExit("north", salon);
